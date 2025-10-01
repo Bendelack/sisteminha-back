@@ -1,3 +1,5 @@
+FROM docker:24-dind
+
 FROM python:3.9-slim
 
 WORKDIR /app
