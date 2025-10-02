@@ -19,7 +19,7 @@ MarkupSafe==2.1.5
 MutPy==0.6.1
 packaging==24.2
 pillow==10.4.0
-pluggy==1.6.0
+pluggy==1.5.0
 psycopg2-binary==2.9.10
 pydot==1.2.4
 Pygments==2.18.0
