@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+lib/
+lib64/
+bin/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+.hypothesis/
+.pytest_cache/
+
+# Django
+*.log
+*.sqlite3
+db.sqlite3
+/media/
+/static/
+
+# Django Rest Framework specifics
+# This can include uploaded files if you're not using a dedicated storage solution
+# For example, if you have a specific folder for uploads outside of the /media/ folder
+# /uploads/
+
+# OS and misc
+.DS_Store
+.env
+.idea/
+.vscode/
+Thumbs.db
