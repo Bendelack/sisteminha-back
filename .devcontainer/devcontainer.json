@@ -23,7 +23,8 @@
 				"ms-python.vscode-pylance",
 				"ms-python.black-formatter",
 				"rocketseat.theme-omni",
-				"PKief.material-icon-theme"
+				"PKief.material-icon-theme",
+				"github.vscode-github-actions"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
@@ -32,6 +33,6 @@
 			}
 		}
 	}
-	// "remoteUser": "root"
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
