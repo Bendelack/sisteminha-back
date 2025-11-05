@@ -72,8 +72,8 @@ class Sistema(models.Model):
 
     class Meta:
         unique_together = [("nome", "desenvolvedor")]
-        # index_together = [("nome", "setor")]
-        indexes = [models.Index(fields=["nome", "setor"])]
+        index_together = [("nome", "setor")]
+        # indexes = [models.Index(fields=["nome", "setor"])]
 
     def __str__(self):
         return self.nome
