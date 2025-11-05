@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import sys
 import os
 from pathlib import Path
 
@@ -26,7 +27,8 @@ SECRET_KEY = "django-insecure-hb7uh^%%zt=ftej6zpd%*ih+enzu(!#&#n8chj)!s4cd_75f^5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "*", "44.210.221.162", "3.225.61.211"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1",
+                 "*", "44.210.221.162", "3.225.61.211"]
 
 # Application definition
 
@@ -114,8 +116,8 @@ DATABASES = {
         "NAME": os.getenv("POSTGRES_DB"),  # Nome do banco de dados
         "USER": os.getenv("POSTGRES_USER"),  # Usuário do banco de dados
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),  # Senha do banco de dados
-        "HOST": "db",  # Nome do serviço do banco de dados no Docker Compose
-        "PORT": 5432,  # Porta padrão do PostgreSQL
+        "HOST": os.getenv("POSTGRES_HOST"),  # Nome do serviço do DB no Compose
+        "PORT": os.getenv("POSTGRES_PORT"),  # Porta do PostgreSQL
     },
     "sqlite": {  # SQLite
         "ENGINE": "django.db.backends.sqlite3",
@@ -170,7 +172,6 @@ MEDIA_ROOT = BASE_DIR / "media"  # Diretório para armazenar arquivos de mídia
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import sys
 
 if "test" in sys.argv:
     DATABASES["default"] = DATABASES["sqlite"]
