@@ -26,6 +26,7 @@ Pygments==2.19.2
 PyJWT==2.10.1
 pyparsing==3.2.5
 pytest==8.4.1
+pytest-django==4.11.1
 pytz==2024.2
 PyYAML==6.0.2
 smmap==5.0.2
