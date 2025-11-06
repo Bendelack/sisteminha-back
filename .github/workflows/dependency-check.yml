@@ -29,13 +29,15 @@ jobs:
           key: ${{ runner.os }}-dependency-check
 
       - name: Run OWASP Dependency Check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: |
           mkdir -p reports
           docker run --rm \
             -v ${{ github.workspace }}:/src \
             -v ${{ github.workspace }}/reports:/report \
-            -e NVD_API_KEY=${{ secrets.NVD_API_KEY }} \
-            owasp/dependency-check \
+            -e NVD_API_KEY=$NVD_API_KEY \
+            owasp/dependency-check:latest \
             --project "backend" \
             --scan /src \
             --format "HTML" \
