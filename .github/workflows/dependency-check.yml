@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  depchecktest:
+  dependency_check:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,19 +20,16 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
           pip install pip-audit
 
 
-      - name: Run pip-audit for Python Dependecy Check
+      - name: Run pip-audit Dependecy Check
         run: |
-          mkdir -p reports
-          pip-audit -r requirements.txt --output-format html --output reports/pip-audit.html
+          pip-audit -f markdown -o pip-audit-report.md
 
 
       - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
            name: pip-audit-report
-           path: reports/pip-audit.html
+           path: pip-audit-report.html
