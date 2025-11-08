@@ -25,10 +25,10 @@ jobs:
           pip install pip-audit
 
 
-      - name: Run pip-audit - Python Dependecy Check
+      - name: Run pip-audit for Python Dependecy Check
         run: |
           mkdir -p reports
-          pip-audit --requirement requirements.txt --output-format html --output reports/pip-audit.html
+          pip-audit -r requirements.txt --output-format html --output reports/pip-audit.html
 
 
       - name: Upload audit report
