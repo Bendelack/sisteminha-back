@@ -27,7 +27,7 @@ jobs:
 
       - name: Run pip-audit Dependecy Check
         run: |
-          pip-audit -f html -o pip-audit-report.html
+          pip-audit -f markdown -o pip-audit-report.md
 
 
       - name: Upload audit report
@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
            name: pip-audit-report
-           path: pip-audit-report.html
+           path: pip-audit-report.md
