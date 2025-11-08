@@ -1,4 +1,4 @@
-name: OWASP Dependency Check
+name: Dependency Check
 
 on:
   push:
@@ -22,26 +22,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-          pip freeze > requirements.lock
+          pip install pip-audit
 
 
-      - name: Run OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
-        with:
-          project: 'backend'
-          path: '.'
-          format: 'HTML'
-          fail_cvss_score: 7.0
-          scan_path_exclusions: |
-            .git/
-            .github/
-          
+      - name: Run pip-audit - Python Dependecy Check
+        run: |
+          mkdir -p reports
+          pip-audit --requirement requirements.txt --output-format html --output reports/pip-audit.html
 
-      - name: Upload Test results
-        if: always()
+
+      - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
-           name: Depcheck report
-           path: ${{github.workspace}}/reports
+           name: pip-audit-report
+           path: reports/pip-audit.html
