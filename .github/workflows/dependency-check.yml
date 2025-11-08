@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
            name: pip-audit-report
-           path: pip-audit-report.html
+           path: pip-audit-report.md
