@@ -3,7 +3,6 @@ astmonkey==0.3.6
 Django==4.2.21
 django-cors-headers==4.6.0
 django-filter==24.3
-django-rest-framework==0.1.0
 djangorestframework==3.15.2
 djangorestframework-simplejwt==5.2.2
 drf-yasg==1.21.8
