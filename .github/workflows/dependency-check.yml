@@ -36,3 +36,4 @@ jobs:
         with:
            name: pip-audit-report
            path: pip-audit-report.md
+           if-no-files-found: ignore
