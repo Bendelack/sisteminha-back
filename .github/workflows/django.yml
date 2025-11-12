@@ -36,3 +36,11 @@ jobs:
     - name: Run Tests
       run: |
         python -W "error::PendingDeprecationWarning" manage.py test
+
+    - name: Verify code formatting with ruff
+      run: |
+        ruff format . --check
+
+    - name: Verify code linting with ruff
+      run: |
+        ruff check .
