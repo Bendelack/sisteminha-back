@@ -1,9 +1,7 @@
 from django.db import models
-from django.db.models import Avg
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.forms import ValidationError
 from django.contrib.auth.models import AbstractUser
-from rest_framework.authtoken.models import Token
 
 
 class User(AbstractUser):

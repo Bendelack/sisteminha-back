@@ -1,3 +1,5 @@
+from django.contrib.auth import get_user_model
+from sisteminha.models import Desenvolvedor
 import sys
 import os
 import django
@@ -8,8 +10,6 @@ sys.path.append(BASE_DIR)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 django.setup()
 
-from django.contrib.auth import get_user_model
-from sisteminha.models import Desenvolvedor
 
 User = get_user_model()
 

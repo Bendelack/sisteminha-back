@@ -1,4 +1,4 @@
-from backend.settings import *
+from backend.settings import *  # noqa: F403
 
 DATABASES = {
     "default": {

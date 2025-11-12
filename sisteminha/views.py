@@ -1,6 +1,4 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from django.contrib.auth.models import AbstractUser
 from .models import (
     Desenvolvedor,
     Microempreendedor,
@@ -29,13 +27,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
 ## Permissions
-from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-
-from rest_framework import status
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
 
 from rest_framework import status
 
