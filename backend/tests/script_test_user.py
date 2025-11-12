@@ -5,7 +5,7 @@ import django
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 django.setup()
 
 from django.contrib.auth import get_user_model
@@ -21,15 +21,11 @@ user = User.objects.create_user(
     username="testuser@example.com",
     email="testuser@example.com",
     password="admin123",
-    perfil='desenvolvedor',
-    first_name='Teste',
-    last_name='User'
+    perfil="desenvolvedor",
+    first_name="Teste",
+    last_name="User",
 )
 
-Desenvolvedor.objects.create(
-    cpf="12345678000",
-    github="githubteste",
-    user=user
-)
+Desenvolvedor.objects.create(cpf="12345678000", github="githubteste", user=user)
 
 print("Usuário de teste criado com sucesso!")
