@@ -2,12 +2,12 @@ asgiref==3.8.1
 astmonkey==0.3.6
 boolean.py==5.0
 CacheControl==0.14.3
-certifi==2025.10.5
+certifi==2025.11.12
 charset-normalizer==3.4.4
 cyclonedx-python-lib==9.1.0
 defusedxml==0.7.1
 Django==5.2.8
-django-cors-headers==4.6.0
+django-cors-headers==4.9.0
 django-filter==25.2
 drf-yasg==1.21.11
 djangorestframework==3.16.1
@@ -19,7 +19,7 @@ GitPython==3.1.45
 idna==3.11
 importlib_metadata==8.7.0
 inflection==0.5.1
-iniconfig==2.1.0
+iniconfig==2.3.0
 Jinja2==3.1.6
 license-expression==30.4.4
 Markdown==3.7
@@ -44,7 +44,7 @@ PyJWT==2.10.1
 pyparsing==3.2.5
 pytest==9.0.0
 pytest-django==4.11.1
-pytz==2024.2
+pytz==2025.2
 PyYAML==6.0.3
 requests==2.32.5
 rich==14.2.0
@@ -53,7 +53,7 @@ sortedcontainers==2.4.0
 sqlparse==0.5.2
 termcolor==3.2.0
 toml==0.10.2
-tomli==2.2.1
+tomli==2.3.0
 typing_extensions==4.15.0
 uritemplate==4.1.1
 urllib3==2.5.0
