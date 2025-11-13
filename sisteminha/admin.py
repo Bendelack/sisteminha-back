@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Desenvolvedor, Microempreendedor, Avaliacao_Desenvolvedor, Avaliacao_Sistema, Categoria, Sistema, User
+from .models import (
+    Desenvolvedor,
+    Microempreendedor,
+    Avaliacao_Desenvolvedor,
+    Avaliacao_Sistema,
+    Categoria,
+    Sistema,
+    User,
+)
 
 admin.site.register(Desenvolvedor)
 admin.site.register(Microempreendedor)

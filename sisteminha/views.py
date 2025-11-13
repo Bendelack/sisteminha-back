@@ -1,12 +1,24 @@
-
-
-from django.shortcuts import render
 from rest_framework import viewsets
-from django.contrib.auth.models import AbstractUser
-from .models import Desenvolvedor, Microempreendedor, Avaliacao_Desenvolvedor, Avaliacao_Sistema, Categoria, Sistema, User
-from .serializers import UserSerializer, DesenvolvedorSerializer, MicroempreendedorSerializer, Avaliacao_DesenvolvedorSerializer, Avaliacao_SistemaSerializer, CategoriaSerializer, SistemaSerializer
+from .models import (
+    Desenvolvedor,
+    Microempreendedor,
+    Avaliacao_Desenvolvedor,
+    Avaliacao_Sistema,
+    Categoria,
+    Sistema,
+    User,
+)
+from .serializers import (
+    UserSerializer,
+    DesenvolvedorSerializer,
+    MicroempreendedorSerializer,
+    Avaliacao_DesenvolvedorSerializer,
+    Avaliacao_SistemaSerializer,
+    CategoriaSerializer,
+    SistemaSerializer,
+)
 from .filters import DesenvolvedorFilter, SistemaFilter
-from rest_framework.parsers import MultiPartParser,FormParser, JSONParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.views import APIView
@@ -15,13 +27,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
 ## Permissions
-from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-
-from rest_framework import status  
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
 
 from rest_framework import status
 
@@ -35,7 +41,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class DesenvolvedorViewSet(viewsets.ModelViewSet):
     queryset = Desenvolvedor.objects.all()
     serializer_class = DesenvolvedorSerializer
-    parser_classes=(MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser)
     filterset_class = DesenvolvedorFilter
     search_fields = ["user__first_name"]
     ordering_fields = ["user__first_name"]
@@ -66,12 +72,14 @@ class MicroempreendedorViewSet(viewsets.ModelViewSet):
 class Avaliacao_DesenvolvedorViewSet(viewsets.ModelViewSet):
     queryset = Avaliacao_Desenvolvedor.objects.all()
     serializer_class = Avaliacao_DesenvolvedorSerializer
-    parser_classes=(MultiPartParser, FormParser, JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
 
 class Avaliacao_SistemaViewSet(viewsets.ModelViewSet):
     queryset = Avaliacao_Sistema.objects.all()
     serializer_class = Avaliacao_SistemaSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
+
 
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
@@ -82,13 +90,12 @@ class CategoriaViewSet(viewsets.ModelViewSet):
 class SistemaViewSet(viewsets.ModelViewSet):
     queryset = Sistema.objects.all()
     serializer_class = SistemaSerializer
-    parser_classes=(MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser)
     filterset_class = SistemaFilter
-    search_fields = ['nome']
-    ordering_fields = ['nome']
+    search_fields = ["nome"]
+    ordering_fields = ["nome"]
 
-
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def sistemas_por_categoria(self, request, pk):
         categoria_id = pk
         sistemas = Sistema.objects.filter(categoria=categoria_id)
@@ -108,36 +115,41 @@ class SistemaViewSet(viewsets.ModelViewSet):
 
 class DesenvolvedorRegistrationView(APIView):
     def post(self, request):
-        user_data = request.data.get('user') ## Pega os dados do user da requisição
-        cpf = request.data.get('cpf')
-        github = request.data.get('github')
+        user_data = request.data.get("user")  ## Pega os dados do user da requisição
+        cpf = request.data.get("cpf")
+        github = request.data.get("github")
 
         try:
-           
-            user_serializer = UserSerializer(data=user_data) 
-            if user_serializer.is_valid(): # Verifica se os dados do user são válidos
+            user_serializer = UserSerializer(data=user_data)
+            if user_serializer.is_valid():  # Verifica se os dados do user são válidos
                 user = user_serializer.save()
             else:
-                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    user_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+                )
             desenvolvedor_data = {
-                'user': user.id,  # Passar o ID do user
-                'cpf': cpf,
-                'github': github,
-    
+                "user": user.id,  # Passar o ID do user
+                "cpf": cpf,
+                "github": github,
             }
             desenvolvedor_serializer = DesenvolvedorSerializer(data=desenvolvedor_data)
             if desenvolvedor_serializer.is_valid():
                 desenvolvedor = desenvolvedor_serializer.save()
                 desenvolvedor_serializer = DesenvolvedorSerializer(desenvolvedor)
-                return Response(desenvolvedor_serializer.data, status=status.HTTP_201_CREATED)
+                return Response(
+                    desenvolvedor_serializer.data, status=status.HTTP_201_CREATED
+                )
             else:
-                return Response(desenvolvedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    desenvolvedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+                )
 
         except Exception as e:
-            return Response({
-                'error': 'Server error',
-                'message': str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Server error", "message": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
 
 class DesenvolvedorLoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -186,34 +198,43 @@ class DesenvolvedorLoginView(ObtainAuthToken):
 
 class MicroempreendedorRegistrationView(APIView):
     def post(self, request):
-        user_data = request.data.get('user') ## Pega os dados do user da requisição
-        cnpj = request.data.get('cnpj')
+        user_data = request.data.get("user")  ## Pega os dados do user da requisição
+        cnpj = request.data.get("cnpj")
 
         try:
-           
             user_serializer = UserSerializer(data=user_data)
             if user_serializer.is_valid():
                 user = user_serializer.save()
             else:
-                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    user_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+                )
             microempreendedor_data = {
-                'user': user.id,  # Passar o ID do user
-                'cnpj': cnpj,
-    
+                "user": user.id,  # Passar o ID do user
+                "cnpj": cnpj,
             }
-            microempreendedor_serializer = MicroempreendedorSerializer(data=microempreendedor_data)
+            microempreendedor_serializer = MicroempreendedorSerializer(
+                data=microempreendedor_data
+            )
             if microempreendedor_serializer.is_valid():
                 microempreendedor = microempreendedor_serializer.save()
-                microempreendedor_serializer = MicroempreendedorSerializer(microempreendedor)
-                return Response(microempreendedor_serializer.data, status=status.HTTP_201_CREATED)
+                microempreendedor_serializer = MicroempreendedorSerializer(
+                    microempreendedor
+                )
+                return Response(
+                    microempreendedor_serializer.data, status=status.HTTP_201_CREATED
+                )
             else:
-                return Response(microempreendedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    microempreendedor_serializer.errors,
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
         except Exception as e:
-            return Response({
-                'error': 'Server error',
-                'message': str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Server error", "message": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 class MicroempreendedorLoginView(ObtainAuthToken):
@@ -304,4 +325,4 @@ class LogoutUsuarioView(APIView):
         token = Token.objects.get(key=token_key)
         token.delete()
 
-        return Response({'detail': 'Usuário deslogado com sucesso.'})
+        return Response({"detail": "Usuário deslogado com sucesso."})
