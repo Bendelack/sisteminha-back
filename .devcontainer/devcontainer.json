@@ -24,7 +24,8 @@
 				"ms-python.black-formatter",
 				"rocketseat.theme-omni",
 				"PKief.material-icon-theme",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"charliermarsh.ruff"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
