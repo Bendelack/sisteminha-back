@@ -44,3 +44,14 @@ jobs:
     - name: Verify code linting with ruff
       run: |
         ruff check .
+
+    - name: Gerar Diagrama UML com PlantUML
+      run: |
+        python manage.py generatepuml --apps sisteminha > diagrama.puml
+        docker run --rm -v ${{ github.workspace }}:/data plantuml/plantuml -tpng diagrama.puml
+
+    - name: Guardar Diagrama UML como Artefato
+      uses: actions/upload-artifact@v5
+      with:
+        name: diagrama-uml
+        path: diagrama.png
