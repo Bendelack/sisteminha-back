@@ -4,7 +4,8 @@ import sys
 import os
 import django
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
@@ -26,6 +27,7 @@ user = User.objects.create_user(
     last_name="User",
 )
 
-Desenvolvedor.objects.create(cpf="12345678000", github="githubteste", user=user)
+Desenvolvedor.objects.create(
+    cpf="12345678000", github="githubteste", user=user)
 
-print("Usuário de teste criado com sucesso!")
+# print("Usuário de teste criado com sucesso!")

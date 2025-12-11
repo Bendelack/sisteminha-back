@@ -47,11 +47,12 @@ jobs:
 
     - name: Gerar Diagrama UML com PlantUML
       run: |
-        python manage.py generatepuml --apps sisteminha > diagrama.puml
-        docker run --rm -v ${{ github.workspace }}:/data plantuml/plantuml -tpng diagrama.puml
+        pip install pylint
+        pyreverse -o puml -p sisteminha sisteminha/models.py
+        docker run --rm -v ${{ github.workspace }}:/data plantuml/plantuml -tpng classes_sisteminha.puml
 
     - name: Guardar Diagrama UML como Artefato
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v4
       with:
         name: diagrama-uml
-        path: diagrama.png
+        path: classes_sisteminha.png
